@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Detail Produk | Clottfits.page</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+  <script src="js/auth.js" defer></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #171714;
+      --cream: #f6f3ec;
+      --white: #ffffff;
+      --brown: #8b7355;
+      --gray: #77776f;
+      --border: #ddd8ce;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: var(--cream);
+      color: var(--black);
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: var(--white);
+      padding: 20px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 26px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+    .logo span {
+      color: var(--brown);
+    }
+
+    .back-btn {
+      text-decoration: none;
+      color: var(--black);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* DETAIL */
+    .detail-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 60px auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .product-image {
+      background: #e9e5dc;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 600px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding-top: 20px;
+    }
+
+    .category {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--brown);
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .product-info h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 48px;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    .description {
+      color: var(--gray);
+      line-height: 1.9;
+      font-size: 15px;
+      margin-bottom: 30px;
+    }
+
+    .product-detail {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 25px 0;
+      margin-bottom: 30px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .detail-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-row span:first-child {
+      color: var(--gray);
+    }
+
+    .detail-row span:last-child {
+      font-weight: 600;
+    }
+
+    /* QUANTITY */
+    .quantity-section {
+      margin-bottom: 25px;
+    }
+
+    .quantity-section label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .quantity-control button {
+      width: 45px;
+      height: 45px;
+      border: none;
+      background: var(--white);
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .quantity-control span {
+      width: 50px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    /* BUTTON */
+    .add-cart {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: 6px;
+      background: var(--black);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .add-cart:hover {
+      background: var(--brown);
+      transform: translateY(-2px);
+    }
+
+    .benefits {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .benefit {
+      background: var(--white);
+      padding: 15px 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .benefit span {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    /* NOT FOUND */
+    .not-found {
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    .not-found h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .not-found a {
+      color: var(--brown);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 850px) {
+      .detail-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+      .product-image img {
+        height: 500px;
+      }
+
+      .product-info h1 {
+        font-size: 38px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .navbar {
+        padding: 18px 5%;
+      }
+
+      .logo {
+        font-size: 21px;
+      }
+
+      .detail-container {
+        width: 92%;
+      }
+
+      .product-image img {
+        height: 420px;
+      }
+
+      .product-info h1 {
+        font-size: 32px;
+      }
+
+      .benefits {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body data-page="store">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      clottfits<span>.page</span>
+    </a>
+
+    <a href="index.html" class="back-btn">
+      ← Kembali ke Toko
+    </a>
+  </nav>
+
+
+  <!-- PRODUCT DETAIL -->
+  <main id="productDetail"></main>
+
+
+  <script>
+    /* ==========================================
+       DATA PRODUK
+       Samakan dengan data produk di script.js
+    ========================================== */
+
+    const defaultProducts = [
+      {
+        id: 1,
+        name: "Cheongsam Noir",
+        price: 129000,
+        category: "cheongsam",
+        image: "image/produk-01.jpeg",
+        description:
+          "Kemeja bekas pilihan yang dikreasikan kembali dengan detail kancing bergaya Cheongsam. Memiliki karakter unik, modern, dan cocok digunakan untuk berbagai gaya.",
+        size: "All Size",
+        stock: 1,
+        condition: "Reworked / Preloved"
+      },
+      {
+        id: 2,
+        name: "Cheongsam Vintage",
+        price: 135000,
+        category: "cheongsam",
+        image: "image/produk-02.jpeg",
+        description:
+          "Kemeja reworked dengan sentuhan vintage dan detail kancing Cheongsam yang memberikan tampilan unik dan berbeda.",
+        size: "All Size",
+        stock: 1,
+        condition: "Reworked / Preloved"
+      },
+      {
+        id: 3,
+        name: "Cheongsam Classic",
+        price: 125000,
+        category: "cheongsam",
+        image: "image/produk-03.jpeg",
+        description:
+          "Kemeja pilihan dengan detail Cheongsam klasik yang dikreasikan menjadi fashion modern dan trendi.",
+        size: "All Size",
+        stock: 1,
+        condition: "Reworked / Preloved"
+      },
+      {
+        id: 4,
+        name: "Cheongsam Earth",
+        price: 139000,
+        category: "cheongsam",
+        image: "image/produk-04.jpeg",
+        description:
+          "Kemeja reworked bernuansa earth tone dengan detail kancing Cheongsam yang unik.",
+        size: "All Size",
+        stock: 1,
+        condition: "Reworked / Preloved"
+      },
+      {
+        id: 5,
+        name: "Cheongsam Limited",
+        price: 149000,
+        category: "cheongsam",
+        image: "image/produk-05.jpeg",
+        description:
+          "Koleksi terbatas dengan desain khas Clottfits.page. Dibuat dalam jumlah terbatas sehingga setiap produk terasa lebih eksklusif.",
+        size: "All Size",
+        stock: 1,
+        condition: "Reworked / Preloved"
+      },
+      {
+        id: 6,
+        name: "Boxy Essential",
+        price: 119000,
+        category: "boxy",
+        image: "image/produk-06.jpeg",
+        description:
+          "Kemeja bekas pilihan yang dimodifikasi menjadi potongan boxy modern. Nyaman digunakan dan mudah dipadukan dengan berbagai outfit.",
+        size: "All Size",
+        stock: 1,
+        condition: "Reworked / Preloved"
+      },
+      {
+        id: 7,
+        name: "Boxy Street",
+        price: 125000,
+        category: "boxy",
+        image: "image/produk-07.jpeg",
+        description:
+          "Kemeja boxy dengan karakter streetwear yang santai, modern, dan cocok untuk gaya sehari-hari.",
+        size: "All Size",
+        stock: 1,
+        condition: "Reworked / Preloved"
+      },
+      {
+        id: 8,
+        name: "Boxy Vintage",
+        price: 129000,
+        category: "boxy",
+        image: "image/produk-08.jpeg",
+        description:
+          "Kemeja vintage yang dikreasikan kembali menjadi potongan boxy untuk memberikan tampilan retro yang lebih modern.",
+        size: "All Size",
+        stock: 1,
+        condition: "Reworked / Preloved"
+      },
+      {
+        id: 9,
+        name: "Boxy Neutral",
+        price: 115000,
+        category: "boxy",
+        image: "image/produk-09.jpeg",
+        description:
+          "Kemeja boxy dengan warna netral yang mudah dipadukan dan cocok digunakan untuk berbagai kesempatan.",
+        size: "All Size",
+        stock: 1,
+        condition: "Reworked / Preloved"
+      },
+      {
+        id: 10,
+        name: "Boxy Limited",
+        price: 145000,
+        category: "boxy",
+        image: "image/produk-10.jpeg",
+        description:
+          "Koleksi boxy edisi terbatas dari Clottfits.page dengan desain unik dan jumlah produk yang sangat terbatas.",
+        size: "All Size",
+        stock: 1,
+        condition: "Reworked / Preloved"
+      },
+      {
+        id: 11,
+        name: "Sandstone Boxy",
+        price: 185000,
+        category: "boxy",
+        image: "image/produk-11.jpeg",
+        description: "Kemeja boxy bernuansa sandstone dengan karakter kasual yang mudah dipadukan.",
+        size: "All Size",
+        stock: 3,
+        condition: "Reworked / Preloved"
+      },
+      {
+        id: 12,
+        name: "Midnight Reworked",
+        price: 205000,
+        category: "limited",
+        image: "image/produk-12.jpeg",
+        description: "Koleksi reworked bernuansa gelap dengan detail unik untuk tampilan istimewa.",
+        size: "All Size",
+        stock: 2,
+        condition: "Reworked / Preloved"
+      }
+    ];
+
+
+    /* ==========================================
+       AMBIL PRODUK DARI LOCAL STORAGE
+    ========================================== */
+
+    const products =
+      JSON.parse(localStorage.getItem("clottfitsProducts"))
+      || defaultProducts;
+
+    products.forEach((item) => {
+      if (/^images\/produk\d+\.jpg$/.test(item.image || "")) {
+        item.image = `image/produk-${String(item.id).padStart(2, "0")}.jpeg`;
+      }
+    });
+
+
+    /* ==========================================
+       AMBIL ID DARI URL
+
+       Contoh:
+       detail.html?id=1
+    ========================================== */
+
+    const params =
+      new URLSearchParams(window.location.search);
+
+    const productId =
+      Number(params.get("id"));
+
+    const product =
+      products.find(item => Number(item.id) === productId);
+
+
+    /* ==========================================
+       QUANTITY
+    ========================================== */
+
+    let quantity = 1;
+
+
+    /* ==========================================
+       RENDER DETAIL PRODUK
+    ========================================== */
+
+    function renderProductDetail() {
+
+      const container =
+        document.getElementById("productDetail");
+
+
+      if (!product) {
+
+        container.innerHTML = `
+          <div class="not-found">
+            <h1>Produk tidak ditemukan</h1>
+
+            <p>
+              Produk yang kamu cari mungkin sudah tidak tersedia.
+            </p>
+
+            <br>
+
+            <a href="index.html">
+              Kembali ke halaman produk
+            </a>
+          </div>
+        `;
+
+        return;
+      }
+
+
+      container.innerHTML = `
+
+        <section class="detail-container">
+
+          <div class="product-image">
+
+            <img
+              src="${product.image || product.img}"
+              alt="${product.name}"
+              onerror="
+                this.src='https://via.placeholder.com/600x700?text=Clottfits.page'
+              "
+            >
+
+          </div>
+
+
+          <div class="product-info">
+
+            <span class="category">
+              ${formatCategory(product.category)}
+            </span>
+
+            <h1>
+              ${product.name}
+            </h1>
+
+            <p class="price">
+              Rp ${Number(product.price)
+                .toLocaleString("id-ID")}
+            </p>
+
+            <p class="description">
+              ${product.description ||
+              "Produk fashion reworked unik dari Clottfits.page."}
+            </p>
+
+
+            <div class="product-detail">
+
+              <div class="detail-row">
+                <span>Kategori</span>
+                <span>
+                  ${formatCategory(product.category)}
+                </span>
+              </div>
+
+              <div class="detail-row">
+                <span>Ukuran</span>
+                <span>
+                  ${product.size || "All Size"}
+                </span>
+              </div>
+
+              <div class="detail-row">
+                <span>Kondisi</span>
+                <span>
+                  ${product.condition ||
+                  "Reworked / Preloved"}
+                </span>
+              </div>
+
+              <div class="detail-row">
+                <span>Stok</span>
+                <span>
+                  ${product.stock || 1} tersedia
+                </span>
+              </div>
+
+            </div>
+
+
+            <div class="quantity-section">
+
+              <label>
+                Jumlah
+              </label>
+
+              <div class="quantity-control">
+
+                <button onclick="decreaseQuantity()">
+                  −
+                </button>
+
+                <span id="quantity">
+                  1
+                </span>
+
+                <button onclick="increaseQuantity()">
+                  +
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <button
+              class="add-cart"
+              onclick="addProductToCart()"
+            >
+              Tambahkan ke Keranjang
+            </button>
+
+
+            <div class="benefits">
+
+              <div class="benefit">
+                <span>♻️</span>
+                Reworked Fashion
+              </div>
+
+              <div class="benefit">
+                <span>✦</span>
+                Produk Unik
+              </div>
+
+              <div class="benefit">
+                <span>📦</span>
+                Pengiriman Indonesia
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      `;
+    }
+
+
+    /* ==========================================
+       FORMAT CATEGORY
+    ========================================== */
+
+    function formatCategory(category) {
+
+      if (category === "cheongsam") {
+        return "Kemeja Cheongsam";
+      }
+
+      if (category === "boxy") {
+        return "Kemeja Boxy";
+      }
+
+      return category || "Fashion";
+    }
+
+
+    /* ==========================================
+       QUANTITY BUTTON
+    ========================================== */
+
+    function increaseQuantity() {
+
+      const stock =
+        Number(product.stock) || 1;
+
+      if (quantity < stock) {
+
+        quantity++;
+
+        document.getElementById(
+          "quantity"
+        ).textContent = quantity;
+
+      } else {
+
+        alert(
+          "Jumlah produk tidak dapat melebihi stok."
+        );
+
+      }
+    }
+
+
+    function decreaseQuantity() {
+
+      if (quantity > 1) {
+
+        quantity--;
+
+        document.getElementById(
+          "quantity"
+        ).textContent = quantity;
+
+      }
+    }
+
+
+    /* ==========================================
+       ADD PRODUCT TO CART
+    ========================================== */
+
+    function addProductToCart() {
+
+      let cart =
+        JSON.parse(
+          localStorage.getItem("clottfitsCart")
+        )
+        || [];
+
+
+      const existingProduct =
+        cart.find(
+          item =>
+            Number(item.id)
+            === Number(product.id)
+        );
+
+
+      if (existingProduct) {
+
+        existingProduct.quantity += quantity;
+
+      } else {
+
+        cart.push({
+
+          ...product,
+
+          image:
+            product.image
+            || product.img,
+
+          quantity: quantity
+
+        });
+
+      }
+
+
+      localStorage.setItem(
+        "clottfitsCart",
+        JSON.stringify(cart)
+      );
+
+
+      alert(
+        `${product.name} berhasil ditambahkan ke keranjang!`
+      );
+
+
+      window.location.href =
+        "index.html";
+
+    }
+
+
+    /* ==========================================
+       INITIALIZE
+    ========================================== */
+
+    renderProductDetail();
+
+  </script>
+
+</body>
+</html>
