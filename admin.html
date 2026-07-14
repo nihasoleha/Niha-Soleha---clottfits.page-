@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Dashboard | Clottfits.page</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="css/admin.css">
+  <script src="js/auth.js" defer></script>
+</head>
+
+<body data-page="admin">
+
+  <!-- MOBILE BUTTON -->
+  <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+      Clottfits<span>.page</span>
+      <small>ADMIN PANEL</small>
+    </div>
+
+    <nav class="sidebar-menu">
+
+      <button class="menu-item active" data-section="dashboard">
+        <span>⌂</span>
+        Dashboard
+      </button>
+
+      <button class="menu-item" data-section="products">
+        <span>□</span>
+        Produk
+      </button>
+
+      <button class="menu-item" data-section="orders">
+        <span>▤</span>
+        Pesanan
+      </button>
+
+      <button class="menu-item" data-section="customers">
+        <span>♙</span>
+        Pelanggan
+      </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+      <a href="index.html">
+        ← Lihat Website
+      </a>
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- HEADER -->
+    <header class="admin-header">
+
+      <div>
+        <p class="welcome-text">ADMIN DASHBOARD</p>
+        <h1 id="pageTitle">Dashboard</h1>
+      </div>
+
+      <div class="admin-profile">
+        <div>
+          <strong>Admin Clottfits</strong>
+          <span>Administrator</span>
+        </div>
+
+        <div class="admin-avatar">
+          C
+        </div>
+      </div>
+
+    </header>
+
+
+    <!-- =====================================
+         DASHBOARD
+    ====================================== -->
+
+    <section class="admin-section active" id="dashboard">
+
+      <div class="stat-grid">
+
+        <div class="stat-card">
+          <div class="stat-icon">□</div>
+
+          <div>
+            <span>Total Produk</span>
+            <h2 id="totalProducts">0</h2>
+          </div>
+        </div>
+
+
+        <div class="stat-card">
+          <div class="stat-icon">▤</div>
+
+          <div>
+            <span>Total Pesanan</span>
+            <h2 id="totalOrders">0</h2>
+          </div>
+        </div>
+
+
+        <div class="stat-card">
+          <div class="stat-icon">♙</div>
+
+          <div>
+            <span>Pelanggan</span>
+            <h2 id="totalCustomers">0</h2>
+          </div>
+        </div>
+
+
+        <div class="stat-card dark">
+          <div class="stat-icon">Rp</div>
+
+          <div>
+            <span>Total Pendapatan</span>
+            <h2 id="totalRevenue">Rp 0</h2>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- RECENT ORDERS -->
+      <div class="content-card">
+
+        <div class="card-header">
+          <div>
+            <h2>Pesanan Terbaru</h2>
+            <p>Pesanan terbaru dari pelanggan Clottfits.page</p>
+          </div>
+
+          <button
+            class="secondary-button"
+            onclick="openSection('orders')"
+          >
+            Lihat Semua
+          </button>
+        </div>
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>ID Pesanan</th>
+                <th>Pelanggan</th>
+                <th>Total</th>
+                <th>Pembayaran</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="recentOrdersTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================
+         PRODUCTS
+    ====================================== -->
+
+    <section class="admin-section" id="products">
+
+      <div class="content-card">
+
+        <div class="card-header">
+
+          <div>
+            <h2>Manajemen Produk</h2>
+            <p>Kelola katalog produk Clottfits.page</p>
+          </div>
+
+          <button
+            class="primary-button"
+            id="addProductBtn"
+          >
+            + Tambah Produk
+          </button>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Produk</th>
+                <th>Kategori</th>
+                <th>Harga</th>
+                <th>Stok</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+
+            <tbody id="productTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================
+         ORDERS
+    ====================================== -->
+
+    <section class="admin-section" id="orders">
+
+      <div class="content-card">
+
+        <div class="card-header">
+
+          <div>
+            <h2>Daftar Pesanan</h2>
+            <p>Kelola pesanan yang masuk dari pelanggan</p>
+          </div>
+
+          <select id="orderFilter">
+            <option value="">Semua Status</option>
+            <option value="Menunggu Pembayaran">
+              Menunggu Pembayaran
+            </option>
+            <option value="Diproses">
+              Diproses
+            </option>
+            <option value="Dikirim">
+              Dikirim
+            </option>
+            <option value="Selesai">
+              Selesai
+            </option>
+          </select>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Pelanggan</th>
+                <th>Produk</th>
+                <th>Total</th>
+                <th>Pengiriman</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+
+            <tbody id="ordersTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================
+         CUSTOMERS
+    ====================================== -->
+
+    <section class="admin-section" id="customers">
+
+      <div class="content-card">
+
+        <div class="card-header">
+
+          <div>
+            <h2>Data Pelanggan</h2>
+            <p>Data pelanggan yang melakukan pemesanan</p>
+          </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>WhatsApp</th>
+                <th>Email</th>
+                <th>Kota</th>
+                <th>Total Pesanan</th>
+              </tr>
+            </thead>
+
+            <tbody id="customersTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================
+       PRODUCT MODAL
+  ====================================== -->
+
+  <div class="admin-modal" id="productModal">
+
+    <div class="modal-box">
+
+      <div class="modal-header">
+
+        <div>
+          <p>PRODUCT MANAGEMENT</p>
+          <h2 id="modalTitle">
+            Tambah Produk
+          </h2>
+        </div>
+
+        <button id="closeProductModal">
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="productForm">
+
+        <input
+          type="hidden"
+          id="productId"
+        >
+
+
+        <div class="form-group">
+          <label>Nama Produk</label>
+
+          <input
+            type="text"
+            id="productName"
+            required
+            placeholder="Contoh: Kemeja Boxy Black"
+          >
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>Harga</label>
+
+            <input
+              type="number"
+              id="productPrice"
+              required
+              placeholder="175000"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>Stok</label>
+
+            <input
+              type="number"
+              id="productStock"
+              required
+              min="0"
+              placeholder="5"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Kategori</label>
+
+          <select
+            id="productCategory"
+            required
+          >
+
+            <option value="">
+              Pilih kategori
+            </option>
+
+            <option value="boxy">
+              Kemeja Boxy
+            </option>
+
+            <option value="cheongsam">
+              Kemeja Cheongsam
+            </option>
+
+            <option value="limited">
+              Limited Edition
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Lokasi Gambar</label>
+
+          <input
+            type="text"
+            id="productImage"
+            required
+            placeholder="image/produk-01.jpeg"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Deskripsi</label>
+
+          <textarea
+            id="productDescription"
+            required
+            placeholder="Deskripsi produk..."
+          ></textarea>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="primary-button full-button"
+        >
+          Simpan Produk
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================
+       ORDER DETAIL MODAL
+  ====================================== -->
+
+  <div class="admin-modal" id="orderModal">
+
+    <div class="modal-box large-modal">
+
+      <div class="modal-header">
+
+        <div>
+          <p>ORDER INFORMATION</p>
+          <h2>Detail Pesanan</h2>
+        </div>
+
+        <button id="closeOrderModal">
+          ×
+        </button>
+
+      </div>
+
+      <div id="orderDetailContent"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- NOTIFICATION -->
+  <div class="admin-toast" id="adminToast">
+    <span>✓</span>
+    <p id="adminToastMessage">
+      Data berhasil disimpan
+    </p>
+  </div>
+
+
+  <script src="js/admin.js"></script>
+
+</body>
+</html>
