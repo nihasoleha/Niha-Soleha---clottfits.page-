@@ -5,8 +5,8 @@ Prototype website e-commerce untuk proyek **“Membangun Website E-Commerce Fung
 ## Tautan Proyek
 
 - Repository GitHub: _https://github.com/nihasoleha/Niha-Soleha---clottfits.page-_
-- GitHub Pages: _tambahkan tautan website aktif di sini_
-- Video demo (opsional): _tambahkan tautan video di sini_
+- GitHub Pages: _https://nihasoleha.github.io/Niha-Soleha---clottfits.page-/_
+- Video demo: _tambahkan tautan video di sini_
 
 ## Ikhtisar Bisnis
 
