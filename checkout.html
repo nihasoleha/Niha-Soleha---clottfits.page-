@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Checkout | Clottfits.page</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/auth.js" defer></script>
+
+  <style>
+    body {
+      background: #f6f3ec;
+    }
+
+    .checkout-navbar {
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .checkout-nav {
+      min-height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back-link {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .checkout-section {
+      padding: 60px 0 100px;
+    }
+
+    .checkout-heading {
+      margin-bottom: 40px;
+    }
+
+    .checkout-heading span {
+      color: #876f55;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    .checkout-heading h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(40px, 5vw, 65px);
+      margin-top: 10px;
+    }
+
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      gap: 35px;
+      align-items: start;
+    }
+
+    .checkout-card {
+      background: #fff;
+      padding: 35px;
+      margin-bottom: 25px;
+      border-radius: 10px;
+    }
+
+    .checkout-card h2 {
+      font-family: "Playfair Display", serif;
+      margin-bottom: 8px;
+      font-size: 27px;
+    }
+
+    .checkout-card > p {
+      color: #77776f;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid #ddd;
+      background: #fff;
+      padding: 14px;
+      border-radius: 6px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #876f55;
+    }
+
+    .form-group textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .shipping-options,
+    .payment-options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 17px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .option-card:hover {
+      border-color: #876f55;
+      background: #faf8f4;
+    }
+
+    .option-card input {
+      accent-color: #171714;
+    }
+
+    .option-info {
+      flex: 1;
+    }
+
+    .option-info strong {
+      display: block;
+    }
+
+    .option-info span {
+      color: #77776f;
+      font-size: 13px;
+    }
+
+    .option-price {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .order-summary {
+      position: sticky;
+      top: 100px;
+      background: #171714;
+      color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    .order-summary h2 {
+      font-family: "Playfair Display", serif;
+      margin-bottom: 25px;
+    }
+
+    .checkout-product {
+      display: grid;
+      grid-template-columns: 65px 1fr;
+      gap: 13px;
+      padding: 15px 0;
+      border-bottom: 1px solid #333;
+    }
+
+    .checkout-product img {
+      width: 65px;
+      height: 80px;
+      object-fit: cover;
+    }
+
+    .checkout-product h4 {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .checkout-product p {
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    .summary-price {
+      margin-top: 25px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #444;
+      margin-top: 15px;
+      padding-top: 20px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .pay-button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 16px;
+      background: #f6f3ec;
+      color: #171714;
+      border: none;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 5px;
+    }
+
+    .pay-button:hover {
+      background: #e8dfd0;
+    }
+
+    .secure-text {
+      text-align: center;
+      color: #999;
+      font-size: 12px;
+      margin-top: 15px;
+    }
+
+    .success-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .success-modal.active {
+      display: flex;
+    }
+
+    .success-box {
+      width: min(500px, 100%);
+      background: #fff;
+      padding: 45px;
+      text-align: center;
+      border-radius: 12px;
+    }
+
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #171714;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+    }
+
+    .success-box h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .success-box p {
+      color: #77776f;
+      margin-bottom: 10px;
+    }
+
+    .order-id {
+      background: #f6f3ec;
+      padding: 15px;
+      margin: 20px 0;
+      font-weight: 700;
+    }
+
+    .success-box a {
+      display: block;
+      background: #171714;
+      color: #fff;
+      padding: 14px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .checkout-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .order-summary {
+        position: static;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .checkout-card {
+        padding: 22px;
+      }
+
+      .success-box {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body data-page="store">
+
+  <!-- NAVBAR -->
+  <header class="checkout-navbar">
+    <div class="container checkout-nav">
+      <a href="index.html" class="logo">
+        Clottfits<span>.page</span>
+      </a>
+
+      <a href="index.html" class="back-link">
+        ← Kembali Belanja
+      </a>
+    </div>
+  </header>
+
+
+  <!-- CHECKOUT -->
+  <main class="checkout-section">
+    <div class="container">
+
+      <div class="checkout-heading">
+        <span>SECURE CHECKOUT</span>
+        <h1>Selesaikan Pesananmu.</h1>
+      </div>
+
+      <form id="checkoutForm">
+
+        <div class="checkout-layout">
+
+          <!-- LEFT -->
+          <div>
+
+            <!-- ALAMAT -->
+            <section class="checkout-card">
+              <h2>Informasi Pembeli</h2>
+              <p>Masukkan informasi penerima dan alamat pengiriman.</p>
+
+              <div class="form-grid">
+
+                <div class="form-group">
+                  <label for="name">Nama Lengkap *</label>
+                  <input
+                    type="text"
+                    id="name"
+                    required
+                    placeholder="Masukkan nama lengkap"
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Nomor WhatsApp *</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    required
+                    placeholder="08xxxxxxxxxx"
+                  >
+                </div>
+
+                <div class="form-group full">
+                  <label for="email">Email *</label>
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    placeholder="nama@email.com"
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="province">Provinsi *</label>
+                  <input
+                    type="text"
+                    id="province"
+                    required
+                    placeholder="Jawa Barat"
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="city">Kabupaten / Kota *</label>
+                  <input
+                    type="text"
+                    id="city"
+                    required
+                    placeholder="Bandung Barat"
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="district">Kecamatan *</label>
+                  <input
+                    type="text"
+                    id="district"
+                    required
+                    placeholder="Nama kecamatan"
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="postalCode">Kode Pos *</label>
+                  <input
+                    type="text"
+                    id="postalCode"
+                    required
+                    placeholder="405xx"
+                  >
+                </div>
+
+                <div class="form-group full">
+                  <label for="address">Alamat Lengkap *</label>
+                  <textarea
+                    id="address"
+                    required
+                    placeholder="Nama jalan, nomor rumah, RT/RW, desa atau kelurahan..."
+                  ></textarea>
+                </div>
+
+                <div class="form-group full">
+                  <label for="note">Catatan Pesanan</label>
+                  <textarea
+                    id="note"
+                    placeholder="Contoh: Tolong hubungi sebelum mengirim..."
+                  ></textarea>
+                </div>
+
+              </div>
+            </section>
+
+
+            <!-- PENGIRIMAN -->
+            <section class="checkout-card">
+              <h2>Metode Pengiriman</h2>
+              <p>Pilih jasa pengiriman yang kamu inginkan.</p>
+
+              <div class="shipping-options">
+
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="shipping"
+                    value="J&T Express"
+                    data-price="15000"
+                    required
+                  >
+
+                  <div class="option-info">
+                    <strong>J&T Express</strong>
+                    <span>Estimasi 2–4 hari</span>
+                  </div>
+
+                  <span class="option-price">Rp15.000</span>
+                </label>
+
+
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="shipping"
+                    value="JNE Regular"
+                    data-price="18000"
+                  >
+
+                  <div class="option-info">
+                    <strong>JNE Regular</strong>
+                    <span>Estimasi 2–5 hari</span>
+                  </div>
+
+                  <span class="option-price">Rp18.000</span>
+                </label>
+
+
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="shipping"
+                    value="SiCepat"
+                    data-price="17000"
+                  >
+
+                  <div class="option-info">
+                    <strong>SiCepat</strong>
+                    <span>Estimasi 2–4 hari</span>
+                  </div>
+
+                  <span class="option-price">Rp17.000</span>
+                </label>
+
+              </div>
+            </section>
+
+
+            <!-- PEMBAYARAN -->
+            <section class="checkout-card">
+              <h2>Metode Pembayaran</h2>
+              <p>Pilih metode pembayaran untuk menyelesaikan pesanan.</p>
+
+              <div class="payment-options">
+
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="QRIS"
+                    required
+                  >
+                  <div class="option-info">
+                    <strong>▦ QRIS</strong>
+                    <span>Bayar menggunakan aplikasi pembayaran apa saja</span>
+                  </div>
+                </label>
+
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="GoPay"
+                  >
+                  <div class="option-info">
+                    <strong>GoPay</strong>
+                    <span>Pembayaran melalui GoPay</span>
+                  </div>
+                </label>
+
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="DANA"
+                  >
+                  <div class="option-info">
+                    <strong>DANA</strong>
+                    <span>Pembayaran melalui DANA</span>
+                  </div>
+                </label>
+
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="ShopeePay"
+                  >
+                  <div class="option-info">
+                    <strong>ShopeePay</strong>
+                    <span>Pembayaran melalui ShopeePay</span>
+                  </div>
+                </label>
+
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="Transfer Bank"
+                  >
+                  <div class="option-info">
+                    <strong>Transfer Bank</strong>
+                    <span>BCA, BNI, BRI, atau Mandiri</span>
+                  </div>
+                </label>
+
+              </div>
+            </section>
+
+          </div>
+
+
+          <!-- RIGHT SUMMARY -->
+          <aside class="order-summary">
+
+            <h2>Ringkasan Pesanan</h2>
+
+            <div id="checkoutProducts"></div>
+
+            <div class="summary-price">
+
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <span>
+                  Rp <span id="subtotal">0</span>
+                </span>
+              </div>
+
+              <div class="summary-row">
+                <span>Ongkir</span>
+                <span>
+                  Rp <span id="shippingCost">0</span>
+                </span>
+              </div>
+
+              <div class="summary-total">
+                <span>Total</span>
+                <span>
+                  Rp <span id="grandTotal">0</span>
+                </span>
+              </div>
+
+            </div>
+
+            <button type="submit" class="pay-button">
+              Buat Pesanan & Bayar
+            </button>
+
+            <p class="secure-text">
+              🔒 Simulasi pembayaran aman untuk proyek e-commerce
+            </p>
+
+          </aside>
+
+        </div>
+
+      </form>
+
+    </div>
+  </main>
+
+
+  <!-- SUCCESS MODAL -->
+  <div class="success-modal" id="successModal">
+
+    <div class="success-box">
+
+      <div class="success-icon">✓</div>
+
+      <h2>Pesanan Berhasil!</h2>
+
+      <p>Terima kasih telah berbelanja di Clottfits.page.</p>
+
+      <div class="order-id">
+        ID Pesanan:
+        <span id="orderId"></span>
+      </div>
+
+      <p>
+        Metode pembayaran:
+        <strong id="selectedPayment"></strong>
+      </p>
+
+      <p>
+        Total pembayaran:
+        <strong>
+          Rp <span id="successTotal"></span>
+        </strong>
+      </p>
+
+      <a href="index.html">
+        Kembali ke Beranda
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <script>
+    let cart =
+      JSON.parse(localStorage.getItem("clottfitsCart")) || [];
+
+    let shippingCost = 0;
+
+
+    function formatRupiah(number) {
+      return number.toLocaleString("id-ID");
+    }
+
+
+    function calculateSubtotal() {
+      return cart.reduce(
+        (total, item) =>
+          total + (item.price * item.quantity),
+        0
+      );
+    }
+
+
+    function renderCheckout() {
+
+      const container =
+        document.getElementById("checkoutProducts");
+
+      container.innerHTML = "";
+
+
+      if (cart.length === 0) {
+
+        container.innerHTML = `
+          <p style="color:#aaa; padding:20px 0;">
+            Keranjang belanja masih kosong.
+          </p>
+        `;
+
+      }
+
+
+      cart.forEach(item => {
+
+        const product =
+          document.createElement("div");
+
+        product.className = "checkout-product";
+
+        product.innerHTML = `
+
+          <img
+            src="${item.image}"
+            alt="${item.name}"
+          >
+
+          <div>
+
+            <h4>${item.name}</h4>
+
+            <p>
+              ${item.quantity} ×
+              Rp ${formatRupiah(item.price)}
+            </p>
+
+            <strong>
+              Rp ${formatRupiah(
+                item.price * item.quantity
+              )}
+            </strong>
+
+          </div>
+
+        `;
+
+        container.appendChild(product);
+
+      });
+
+
+      updateTotal();
+
+    }
+
+
+    function updateTotal() {
+
+      const subtotal =
+        calculateSubtotal();
+
+      const grandTotal =
+        subtotal + shippingCost;
+
+
+      document.getElementById("subtotal")
+        .textContent =
+        formatRupiah(subtotal);
+
+
+      document.getElementById("shippingCost")
+        .textContent =
+        formatRupiah(shippingCost);
+
+
+      document.getElementById("grandTotal")
+        .textContent =
+        formatRupiah(grandTotal);
+
+    }
+
+
+    document
+      .querySelectorAll(
+        'input[name="shipping"]'
+      )
+      .forEach(option => {
+
+        option.addEventListener(
+          "change",
+          function() {
+
+            shippingCost =
+              Number(this.dataset.price);
+
+            updateTotal();
+
+          }
+        );
+
+      });
+
+
+    document
+      .getElementById("checkoutForm")
+      .addEventListener(
+        "submit",
+        function(event) {
+
+          event.preventDefault();
+
+
+          if (cart.length === 0) {
+
+            alert(
+              "Keranjang belanja masih kosong."
+            );
+
+            return;
+
+          }
+
+
+          const selectedPayment =
+            document.querySelector(
+              'input[name="payment"]:checked'
+            );
+
+
+          const selectedShipping =
+            document.querySelector(
+              'input[name="shipping"]:checked'
+            );
+
+
+          if (
+            !selectedPayment ||
+            !selectedShipping
+          ) {
+
+            alert(
+              "Silakan pilih pengiriman dan metode pembayaran."
+            );
+
+            return;
+
+          }
+
+
+          const subtotal =
+            calculateSubtotal();
+
+
+          const total =
+            subtotal + shippingCost;
+
+
+          const orderId =
+            "CLT-" +
+            Date.now()
+              .toString()
+              .slice(-8);
+
+
+          const order = {
+
+            id: orderId,
+
+            customer: {
+              name:
+                document.getElementById("name").value,
+
+              phone:
+                document.getElementById("phone").value,
+
+              email:
+                document.getElementById("email").value,
+
+              province:
+                document.getElementById("province").value,
+
+              city:
+                document.getElementById("city").value,
+
+              district:
+                document.getElementById("district").value,
+
+              postalCode:
+                document.getElementById("postalCode").value,
+
+              address:
+                document.getElementById("address").value,
+
+              note:
+                document.getElementById("note").value
+            },
+
+            products: cart,
+
+            shipping:
+              selectedShipping.value,
+
+            shippingCost:
+              shippingCost,
+
+            payment:
+              selectedPayment.value,
+
+            total:
+              total,
+
+            status:
+              "Menunggu Pembayaran",
+
+            date:
+              new Date().toLocaleString("id-ID")
+
+          };
+
+
+          let orders =
+            JSON.parse(
+              localStorage.getItem(
+                "clottfitsOrders"
+              )
+            ) || [];
+
+
+          orders.push(order);
+
+
+          localStorage.setItem(
+            "clottfitsOrders",
+            JSON.stringify(orders)
+          );
+
+
+          localStorage.removeItem(
+            "clottfitsCart"
+          );
+
+
+          document.getElementById("orderId")
+            .textContent =
+            orderId;
+
+
+          document.getElementById(
+            "selectedPayment"
+          ).textContent =
+            selectedPayment.value;
+
+
+          document.getElementById(
+            "successTotal"
+          ).textContent =
+            formatRupiah(total);
+
+
+          document.getElementById(
+            "successModal"
+          ).classList.add(
+            "active"
+          );
+
+        }
+      );
+
+
+    renderCheckout();
+  </script>
+
+</body>
+</html>
