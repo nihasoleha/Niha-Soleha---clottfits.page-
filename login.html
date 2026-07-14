@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masuk | Clottfits.page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;padding:20px;display:grid;place-items:center;background:#f6f3ec;color:#171714;font-family:"DM Sans",sans-serif}.login-container{width:min(100%,1000px);min-height:600px;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;border-radius:20px;background:#fff;box-shadow:0 20px 60px #0002}.login-brand{padding:58px;display:flex;flex-direction:column;justify-content:space-between;background:#171714;color:#fff}.logo,h1,h2{font-family:"Playfair Display",serif}.logo{font-size:30px}.logo span,.eyebrow{color:#bda98f}.eyebrow{font-size:10px;font-weight:700;letter-spacing:3px}.login-brand h1{font-size:47px;line-height:1.12;margin:20px 0}.login-brand p:last-child,.brand-footer{color:#aaa;line-height:1.8;font-size:14px}.brand-footer{font-size:12px;color:#777}.login-form-area{padding:58px;display:flex;align-items:center}.login-form-wrapper{width:100%}.login-form-wrapper h2{font-size:38px;margin:8px 0}.description{margin:0 0 24px;color:#777;line-height:1.7;font-size:14px}.role-selector{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:25px}.role-button{padding:11px;border:1px solid #ddd;border-radius:7px;background:#fff;color:#777;font-weight:700;cursor:pointer}.role-button.active{border-color:#171714;background:#171714;color:#fff}.form-group{margin-bottom:18px}.form-group label{display:block;margin-bottom:8px;font-size:12px;font-weight:700}.form-group input{width:100%;padding:14px;border:1px solid #ddd;border-radius:7px;font:inherit}.password-wrapper{position:relative}.password-wrapper input{padding-right:84px}.show-password{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:#876f55;font-weight:700;cursor:pointer}.login-button{width:100%;margin-top:8px;padding:15px;border:0;border-radius:7px;background:#171714;color:#fff;font-weight:700;cursor:pointer}.error-message{display:none;margin-bottom:18px;padding:12px;border-radius:7px;background:#fce7e7;color:#a93d3d;font-size:13px}.error-message.show{display:block}.demo-info{margin-top:22px;padding:14px;border-radius:7px;background:#f6f3ec;color:#777;font-size:12px;line-height:1.7}.back-home{display:block;margin-top:20px;text-align:center;color:#777;font-size:13px;text-decoration:none}@media(max-width:800px){.login-container{grid-template-columns:1fr}.login-brand{min-height:275px;padding:40px}.login-brand h1{font-size:37px}.brand-footer{display:none}.login-form-area{padding:40px}}@media(max-width:500px){body{padding:0}.login-container{min-height:100vh;border-radius:0}.login-brand,.login-form-area{padding:32px 25px}.login-brand h1{font-size:31px}.login-form-wrapper h2{font-size:30px}}
+  </style>
+</head>
+<body>
+  <main class="login-container">
+    <section class="login-brand">
+      <div class="logo">clottfits<span>.page</span></div>
+      <div>
+        <p class="eyebrow">REWORKED FASHION STORE</p>
+        <h1>Masuk dan temukan <span>gaya unikmu.</span></h1>
+        <p>Pilih akses pengguna untuk berbelanja koleksi kami, atau akses admin untuk mengelola produk dan pesanan.</p>
+      </div>
+      <div class="brand-footer">© 2026 Clottfits.page — Reworked Fashion</div>
+    </section>
+    <section class="login-form-area">
+      <div class="login-form-wrapper">
+        <p class="eyebrow" id="accessLabel">AKSES PENGGUNA</p>
+        <h2>Selamat Datang</h2>
+        <p class="description" id="description">Masukkan nama Anda untuk mulai berbelanja di Clottfits.page.</p>
+        <div class="role-selector" aria-label="Pilih jenis akses">
+          <button type="button" class="role-button active" data-role="user">Pengguna</button>
+          <button type="button" class="role-button" data-role="admin">Admin</button>
+        </div>
+        <div class="error-message" id="errorMessage">Nama pengguna atau password yang Anda masukkan salah.</div>
+        <form id="loginForm">
+          <div class="form-group"><label for="username" id="usernameLabel">Nama</label><input type="text" id="username" placeholder="Masukkan nama Anda" required></div>
+          <div class="form-group" id="passwordGroup" hidden><label for="password">Password</label><div class="password-wrapper"><input type="password" id="password" placeholder="Masukkan password"><button type="button" class="show-password" id="showPassword">Lihat</button></div></div>
+          <button type="submit" class="login-button" id="loginButton">Masuk ke Toko →</button>
+        </form>
+        <div class="demo-info" id="demoInfo" hidden><strong>Akun Admin Demo:</strong><br>Username: admin<br>Password: clottfits123</div>
+      </div>
+    </section>
+  </main>
+  <script>
+    let role = new URLSearchParams(location.search).get("role") === "admin" ? "admin" : "user";
+    const $ = (id) => document.getElementById(id);
+    const setRole = (nextRole) => {
+      role = nextRole;
+      const admin = role === "admin";
+      $("passwordGroup").hidden = !admin;
+      $("demoInfo").hidden = !admin;
+      $("accessLabel").textContent = admin ? "AKSES ADMIN" : "AKSES PENGGUNA";
+      $("usernameLabel").textContent = admin ? "Username" : "Nama";
+      $("username").placeholder = admin ? "Masukkan username" : "Masukkan nama Anda";
+      $("description").textContent = admin ? "Silakan masuk dengan akun administrator untuk membuka dashboard." : "Masukkan nama Anda untuk mulai berbelanja di Clottfits.page.";
+      $("loginButton").textContent = admin ? "Masuk ke Dashboard →" : "Masuk ke Toko →";
+      document.querySelectorAll(".role-button").forEach((button) => button.classList.toggle("active", button.dataset.role === role));
+      $("errorMessage").classList.remove("show");
+    };
+    document.querySelectorAll(".role-button").forEach((button) => button.addEventListener("click", () => setRole(button.dataset.role)));
+    $("showPassword").addEventListener("click", function () { const input = $("password"); input.type = input.type === "password" ? "text" : "password"; this.textContent = input.type === "password" ? "Lihat" : "Sembunyi"; });
+    $("loginForm").addEventListener("submit", (event) => { event.preventDefault(); const username = $("username").value.trim(); const password = $("password").value; if (role === "user" && username.length >= 2) { localStorage.setItem("clottfitsRole", "user"); localStorage.setItem("clottfitsUserName", username); location.href = "index.html"; return; } if (role === "admin" && username === "admin" && password === "clottfits123") { localStorage.setItem("clottfitsRole", "admin"); localStorage.setItem("clottfitsAdminLogin", "true"); localStorage.setItem("clottfitsAdminName", "Admin Clottfits"); location.href = "admin.html"; return; } $("errorMessage").classList.add("show"); });
+    setRole(role);
+  </script>
+</body>
+</html>
