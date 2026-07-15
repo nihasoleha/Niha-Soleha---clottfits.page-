@@ -135,6 +135,34 @@ Website dibuat dengan HTML, CSS, dan JavaScript vanilla tanpa framework agar imp
 
 Tampilan dirancang untuk desktop, tablet, dan seluler. Layout katalog, checkout, detail produk, dashboard admin, navigasi, banner, dan formulir menggunakan breakpoint media query agar tetap mudah digunakan pada layar kecil.
 
+## Screenshot Website
+
+Dokumentasi tampilan dikelompokkan berdasarkan perangkat dan jenis akses.
+
+### Desktop
+
+| Beranda | Katalog Produk |
+| --- | --- |
+| ![Beranda desktop](screenshot/desktop/desktop-01-beranda.png) | ![Katalog desktop](screenshot/desktop/desktop-03-katalog.png) |
+
+| Checkout | Dashboard Admin |
+| --- | --- |
+| ![Checkout desktop](screenshot/desktop/desktop-04-checkout-form.png) | ![Dashboard admin desktop](screenshot/desktop/desktop-10-admin-dashboard.png) |
+
+Screenshot desktop lengkap:
+
+- Beranda, tentang, katalog, checkout, pengiriman, pembayaran.
+- Detail produk, keranjang, dan konfirmasi pesanan.
+- Dashboard, manajemen produk, pesanan, dan pelanggan admin.
+
+### Mobile — Pengguna
+
+Terdapat 19 screenshot alur pengguna mobile, tersimpan di folder [`screenshot/mobile/pengguna`](screenshot/mobile/pengguna/), dengan format nama `pengguna-mobile-01.jpeg` hingga `pengguna-mobile-19.jpeg`.
+
+### Mobile — Admin
+
+Terdapat 5 screenshot halaman admin mobile, tersimpan di folder [`screenshot/mobile/admin`](screenshot/mobile/admin/), dengan format nama `admin-mobile-01.jpeg` hingga `admin-mobile-05.jpeg`.
+
 ## Struktur Folder
 
 ```text
@@ -152,11 +180,16 @@ CLOTTFITS.PAGE/
 │   ├── auth.js              # Proteksi akses berdasarkan peran
 │   ├── script.js            # Katalog dan keranjang
 │   └── admin.js             # Manajemen katalog dan pesanan
-└── image/
-    ├── logo .jpeg
-    ├── banner.jpeg
-    ├── banner tentang.jpeg
-    └── produk-01.jpeg ... produk-12.jpeg
+├── image/
+│   ├── logo .jpeg
+│   ├── banner.jpeg
+│   ├── banner tentang.jpeg
+│   └── produk-01.jpeg ... produk-12.jpeg
+└── screenshot/
+    ├── desktop/             # 13 screenshot desktop dengan nama sesuai halaman
+    └── mobile/
+        ├── pengguna/        # 19 screenshot pengguna mobile
+        └── admin/           # 5 screenshot admin mobile
 ```
 
 ## Cara Menjalankan
